@@ -1,0 +1,64 @@
+* {
+  transition: all 0.5s ease-in;
+}
+
+nav {
+  background-image: url(../images/TartanBanner.png);
+  background-size: cover;
+  height: 20vh;
+}
+
+.nav div {
+  /* margin: ; */
+}
+
+.color-groups .group {
+  display: flex;
+  flex-direction: column;
+}
+
+.color-groups .group ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+
+.color-groups .group ul li {
+  height: 4rem;
+  width: 4rem;
+  border: 1px solid grey;
+  cursor: pointer;
+  list-style-type: none;
+  margin: 2rem 1rem 2rem 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.color-groups .group ul li:hover {
+  height: 4.5rem;
+  width: 4.5rem;
+  /* transform: translateY(-5px); */
+}
+
+.colorPopup {
+  position: relative;
+  width: 7rem;
+  height: 5rem;
+  top: -6rem;
+  left: -1rem;
+  font-size: 0.8rem;
+  background-color: rgb(214, 214, 214);
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  /* opacity: 0; */
+  text-align: center;
+}
+
+.group ul li:hover .colorPopup {
+  display: flex;
+}
+
+.colorPopup span {
+  /* margin: 2rem 0rem; */
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tartan Paints</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="./assets/images/Tartan Logo.png"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="#">Our Paints</a>
+                    <a class="nav-link" href="#">Blog</a>
+                    <a class="nav-link" href="#">Shop</a>
+                    <a class="nav-link" href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div class="container">
+            <div class="row justify-content-start">
+                <div class="col-12">
+                    <h1>Colors
+                    </h1>
+                </div>
+            </div>
+            <div class="row justify-content-start">
+                <div class="col-6">
+                    <h3>Color Scheme
+                    </h3>
+                </div>
+            </div>
+            <div class="container-fluid color-groups">
+                <div class="group whites">
+                    <h4>Whites</h4>
+                    <ul>
+
+                    </ul>
+                </div>
+                <div class="group greys">
+                    <h4>Greys</h4>
+                    <ul>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+        </script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyDoTAElxm0DRnnCcoWtMm9STJUIe57j9hw",
+            authDomain: "testprojecttamim.firebaseapp.com",
+            projectId: "testprojecttamim",
+            storageBucket: "testprojecttamim.appspot.com",
+            messagingSenderId: "565758036095",
+            appId: "1:565758036095:web:2b1e1cf6c8d400f39a974a",
+            measurementId: "G-LC6TDQS1XM"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        var firestore = firebase.firestore();
+    </script>
+    <!-- <script src="./assets/js/main.js"></script> -->
+    <script src="./assets/js/app.js"></script>
+</body>
+
+</html>
