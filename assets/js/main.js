@@ -29,7 +29,10 @@ function createColorGroup(groupName) {
 </div>`;
 }
 function renderEachColorLi(group) {
-  return `                        <li style="background-color:${group.CodeHex}">
+  return `                        <li>
+  <div class="color-swatch ${group.ColorName}" style="background-color:${group.CodeHex}">
+  </div>
+
     <div class="hover-popup">
 
     </div>

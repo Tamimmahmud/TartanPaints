@@ -8,36 +8,111 @@ nav {
   height: 20vh;
 }
 
+.navbar-nav {
+}
+
+.navbar-nav .nav-link {
+  font-family: Playfair Display;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  color: rgba(255, 255, 255, 1) !important;
+}
 .nav div {
   /* margin: ; */
 }
 
+main {
+  margin: 5rem 0rem;
+}
+
+.color-heading {
+  margin: 2rem 0rem;
+  font-family: Playfair Display;
+}
+
+.color-heading h2 {
+}
+
+.color-scheme {
+  margin: 2rem 0rem;
+  font-family: Noto Sans;
+  display: flex;
+  flex-direction: column;
+}
+
+.color-scheme h3 {
+  font-size: 1rem;
+}
+
+.color-scheme::after {
+  content: "";
+  display: inline-block;
+  height: 0.5em;
+  vertical-align: bottom;
+  width: 100%;
+  margin-right: -100%;
+  margin-left: 10px;
+  border-top: 1px solid grey;
+  opacity: 0.5;
+}
 .color-groups .group {
   display: flex;
   flex-direction: column;
 }
 
+.color-groups .group h4 {
+  font-family: Playfair Display;
+  font-size: 1.2rem;
+}
 .color-groups .group ul {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   list-style-type: none;
+
+  /* overflow-y: hidden; */
 }
 
 .color-groups .group ul li {
-  height: 4rem;
-  width: 4rem;
-  border: 1px solid grey;
-  cursor: pointer;
+  max-height: 7rem;
+  width: 7rem;
   list-style-type: none;
   margin: 2rem 1rem 2rem 1rem;
   transition: all 0.3s ease-in-out;
 }
 
-.color-groups .group ul li:hover {
-  height: 4.5rem;
-  width: 4.5rem;
-  /* transform: translateY(-5px); */
+.color-groups .group ul li .color-swatch {
+  height: 6rem;
+  width: 6rem;
+  filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.15));
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.color-groups .group ul li .swatch-content {
+  margin: 2rem 0rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.swatch-content span {
+  font-size: 0.8rem;
+}
+
+.swatch-content img {
+  height: 10px;
+}
+
+.color-groups .group ul li .color-swatch:hover {
+  transform: translateY(-0.25rem);
+  transform: translateX(-0.25rem);
+  height: 6.5rem;
+  width: 6.5rem;
 }
 
 .colorPopup {
@@ -55,10 +130,16 @@ nav {
   text-align: center;
 }
 
-.group ul li:hover .colorPopup {
+.group ul li .color-swatch:hover .colorPopup {
   display: flex;
 }
 
 .colorPopup span {
   /* margin: 2rem 0rem; */
+}
+
+footer {
+  background: url(../images/TartanBanner.png);
+  background-size: cover;
+  height: 20vh;
 }

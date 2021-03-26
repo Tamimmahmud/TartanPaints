@@ -14,17 +14,30 @@ const greysArray = [];
 function renderColorSwatch(doc, container) {
   let li = document.createElement("li");
   let popup = document.createElement("div");
-
+  let colorBox = document.createElement("div");
+  let swatchContent = document.createElement("div");
+  let swatchName = document.createElement("span");
+  let copyIcon = document.createElement("img");
   let popupColorName = document.createElement("span");
   let popupColorCode = document.createElement("span");
   popupColorName.innerText = `${doc.data().ColorName}`;
   popupColorCode.innerText = `${doc.data().CodeHex}`;
+
+  colorBox.classList.add("color-swatch");
+
   popup.classList.add("colorPopup");
   popup.appendChild(popupColorName);
   popup.appendChild(popupColorCode);
+  swatchName.innerText = `${doc.data().ColorName}`;
+  swatchContent.appendChild(swatchName);
+  swatchContent.appendChild(copyIcon);
+  swatchContent.classList.add("swatch-content");
+  copyIcon.setAttribute("src", "../assets/images/copyIcon.png");
+  colorBox.setAttribute("style", `background-Color: ${doc.data().CodeHex}`);
 
-  li.setAttribute("style", `background-Color: ${doc.data().CodeHex}`);
-  li.appendChild(popup);
+  li.appendChild(colorBox);
+  li.appendChild(swatchContent);
+  colorBox.appendChild(popup);
 
   container.appendChild(li);
 }
@@ -61,7 +74,3 @@ function getGreys() {
 
 getWhites();
 getGreys();
-
-const test = [{ 1: "test 1" }];
-console.log(test);
-console.log(typeof test);
