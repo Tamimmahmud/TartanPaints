@@ -3,8 +3,8 @@ const colorGroup = mainContainer.querySelector(".color-groups");
 const whiteContainer = colorGroup.querySelector(".whites ul");
 const greyContainer = colorGroup.querySelector(".greys ul");
 const testBtn = document.querySelector(".test");
-var colorsRef = firestore.collection("ColorProfiles");
-var whitesRef = colorsRef.where("Group", "==", "White");
+var colorsRef = firestore.collection("colorProfiles");
+var whitesRef = colorsRef.where("Group", "==", "Whites");
 var greysRef = colorsRef.where("Group", "==", "Greys");
 
 const whitesArray = [];
@@ -32,7 +32,7 @@ function renderColorSwatch(doc, container) {
   swatchContent.appendChild(swatchName);
   swatchContent.appendChild(copyIcon);
   swatchContent.classList.add("swatch-content");
-  copyIcon.setAttribute("src", "../assets/images/copyIcon.png");
+  copyIcon.setAttribute("src", "./assets/images/copyIcon.png");
   colorBox.setAttribute("style", `background-Color: ${doc.data().CodeHex}`);
 
   li.appendChild(colorBox);

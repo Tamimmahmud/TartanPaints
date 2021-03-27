@@ -6,6 +6,7 @@ nav {
   background-image: url(../images/TartanBanner.png);
   background-size: cover;
   height: 20vh;
+  max-height: auto;
 }
 
 .navbar-nav {
@@ -60,6 +61,19 @@ main {
 .color-groups .group {
   display: flex;
   flex-direction: column;
+  margin: 2rem 0rem;
+}
+.color-groups .group::after {
+  content: "";
+  display: inline-block;
+  height: 0.5em;
+  vertical-align: bottom;
+  width: 100%;
+  margin-top: 2rem;
+  margin-right: -100%;
+  margin-left: 10px;
+  border-top: 1px solid grey;
+  opacity: 0.5;
 }
 
 .color-groups .group h4 {
@@ -105,7 +119,7 @@ main {
 }
 
 .swatch-content img {
-  height: 10px;
+  height: 15px;
 }
 
 .color-groups .group ul li .color-swatch:hover {
