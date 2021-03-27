@@ -1,11 +1,11 @@
 * {
-  transition: all 0.5s ease-in;
+  transition: all 0.2s ease-in;
 }
 
 nav {
   background-image: url(../images/TartanBanner.png);
   background-size: cover;
-  height: 20vh;
+  /* height: 20vh; */
   max-height: auto;
 }
 
@@ -116,10 +116,21 @@ main {
 
 .swatch-content span {
   font-size: 0.8rem;
+  width: 80%;
 }
 
 .swatch-content img {
+  cursor: pointer;
   height: 15px;
+  opacity: 0.5;
+  transition: all 0.1s ease;
+}
+
+.swatch-content img:hover {
+  opacity: 1;
+}
+.swatch-content img:hover::after {
+  opacity: 1;
 }
 
 .color-groups .group ul li .color-swatch:hover {
@@ -145,15 +156,58 @@ main {
 }
 
 .group ul li .color-swatch:hover .colorPopup {
-  display: flex;
+  display: none;
 }
 
 .colorPopup span {
   /* margin: 2rem 0rem; */
 }
 
+.copiedPopUp {
+  /* visibility: hidden; */
+  opacity: 0;
+  position: fixed;
+  top: 47.5vh;
+  left: 40vw;
+  width: 5rem;
+  height: 5rem;
+  z-index: 5;
+  background-color: #f9f9f9;
+  outline: Solid #000000 0.5px;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.copiedPopUp.active {
+  width: 25rem;
+  height: 5rem;
+  opacity: 1;
+  /* visibility: visible; */
+}
+
+.copiedPopUp .copiedContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  transition: all 0.2s ease-in-out;
+}
+
+.copiedContent span.doneIcon {
+  width: 20px;
+}
+
+.copiedColorName {
+  font-weight: 600;
+}
+.copiedPopUp img.closeCopy {
+  position: relative;
+  right: -24rem;
+  width: 12px;
+  height: 12px;
+}
+
 footer {
   background: url(../images/TartanBanner.png);
   background-size: cover;
-  height: 20vh;
+  height: 15vh;
 }

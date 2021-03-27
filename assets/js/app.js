@@ -7,8 +7,8 @@ var colorsRef = firestore.collection("colorProfiles");
 var whitesRef = colorsRef.where("Group", "==", "Whites");
 var greysRef = colorsRef.where("Group", "==", "Greys");
 
+const copiedPopup = document.querySelector(".copiedPopUp");
 const whitesArray = [];
-console.log(`After initialization ${typeof whitesArray}`);
 const greysArray = [];
 
 function renderColorSwatch(doc, container) {
@@ -34,13 +34,41 @@ function renderColorSwatch(doc, container) {
   swatchContent.classList.add("swatch-content");
   copyIcon.setAttribute("src", "./assets/images/copyIcon.png");
   colorBox.setAttribute("style", `background-Color: ${doc.data().CodeHex}`);
-
+  li.setAttribute("data-colorName", `${doc.data().ColorName}`);
   li.appendChild(colorBox);
   li.appendChild(swatchContent);
   colorBox.appendChild(popup);
 
   container.appendChild(li);
+
+  function copyToClipboard(e) {
+    // select list item and get data-attribute which is the colorName
+    let colorSwatch = e.target.parentElement;
+    let listItem = colorSwatch.parentElement;
+    let dataColorName = listItem.dataset.colorname;
+
+    // copy to clipboard
+    const el = document.createElement("textarea");
+    el.value = dataColorName;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    el.remove();
+
+    copiedPopup.classList.add("active");
+    const copiedPopUpSpan = document.querySelector(".copiedColorName");
+    copiedPopUpSpan.innerText = dataColorName;
+  }
+
+  copyIcon.addEventListener("click", (e) => {
+    copyToClipboard(e);
+  });
 }
+
+const closeCopyPopup = document.querySelector(".closeCopy");
+closeCopyPopup.addEventListener("click", (e) => {
+  copiedPopup.classList.remove("active");
+});
 
 function getWhites() {
   whitesRef
