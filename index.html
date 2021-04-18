@@ -35,6 +35,7 @@
     </nav>
     <main>
         <div class="container main-container">
+            <div class="black-screen"></div>
             <div class="row justify-content-start color-heading">
                 <h2>Colors
                 </h2>
@@ -75,25 +76,31 @@
 
 
     </div>
-    <div class="colorDemoPopup p-5">
-        <div class="closeBtn">
-
+    <div class="colorDemoPopup p-2">
+        <div class="closeBtn text-align-end">
+            close
         </div>
         <div class="colorDemoContainer container">
             <div class="row colorDetails">
-                <div class="col-4 col-md-4 col-lg-4 p-4">
+                <div class="col-4 col-md-3 col-lg-2 col-xl-2  colorDetailsSample">
                     <div class="colorSolid"></div>
                 </div>
-                <div class="col-8 col-md-8 col-lg-8 p-4">
-                    <h1 id="colorName" class="justify-content-center">Color Name</h1>
-                    <h4 id="colorCode">Color Code</h4>
-                    <h4>Copy to Clipboard</h4>
+                <div class=" col-7 col-md-7 col-lg-9 col-xl-9 colorDetailsText">
+                    <h3 id="colorName" class="justify-content-center">Color Name</h3>
+                    <h5 id="colorCode">Color Code</h4>
+                        <p>Copy to Clipboard</p>
                 </div>
             </div>
-            <div class="row demoImg">
-                <img src="./assets/images/colorDemoImg.jpeg" alt="">
+            <div class="demoImg">
+
+                <img src="./assets/images/colorDemoImg.jpg" alt="">
+
             </div>
-            <div class="row otherColors"></div>
+            <div class="row otherColors">
+                <div class="placeholder">
+                    <p>placeholder</p>
+                </div>
+            </div>
         </div>
     </div>
     <footer>

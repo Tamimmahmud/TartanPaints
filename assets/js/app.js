@@ -11,8 +11,8 @@ const colorDemoPopup = document.querySelector(".colorDemoPopup");
 const colorSolid = document.querySelector(".colorSolid");
 let colorDemoCName = document.querySelector(".colorDetails #colorName");
 let colorDemoCHex = document.querySelector(".colorDetails #colorCode");
+let colorDemoImg = document.querySelector(".demoImg img");
 
-console.log(colorDemoCName, colorDemoCHex);
 const copiedPopup = document.querySelector(".copiedPopUp");
 const whitesArray = [];
 const greysArray = [];
@@ -50,25 +50,36 @@ function renderColorSwatch(doc, container) {
   container.appendChild(li);
 
   function colorDemoSetup(colorHex, colorName) {
-    console.log(colorSolid);
     colorSolid.setAttribute("style", `background-color: ${colorHex}`);
-    colorDemoCHex.innerText = colorHex;
+    colorDemoCHex.innerText = `${colorHex}`;
     colorDemoCName.innerText = colorName;
+    // colorDemoImg.setAttribute("src", `${doc.data().ImgLink}`);
   }
-
+  const blackScreen = document.querySelector(".black-screen");
+  const colorDemoCloseBtn = document.querySelector(".colorDemoPopup .closeBtn");
   function colorDemoLoad(colorHex, colorName) {
     if (!colorDemoPopup.classList.contains("active")) {
-      colorDemoSetup(colorHex, colorName);
-      console.log("done");
       colorDemoPopup.classList.add("active");
+      blackScreen.classList.toggle("active");
+    }
+    colorDemoSetup(colorHex, colorName);
+  }
+
+  function colorDemoClose() {
+    if (colorDemoPopup.classList.contains("active")) {
+      colorDemoPopup.classList.remove("active");
+      blackScreen.classList.toggle("active");
     }
   }
+
+  colorDemoCloseBtn.addEventListener("click", () => {
+    colorDemoClose();
+  });
 
   colorBox.addEventListener("click", (e) => {
     let colorHex = e.target.getAttribute("data-colorHex");
     let colorName = e.target.parentElement.getAttribute("data-colorName");
     colorDemoLoad(colorHex, colorName);
-    // console.log(colorHex, colorName);
   });
 
   function copyToClipboard(e) {
