@@ -53,7 +53,7 @@ function renderColorSwatch(doc, container) {
     colorSolid.setAttribute("style", `background-color: ${colorHex}`);
     colorDemoCHex.innerText = `${colorHex}`;
     colorDemoCName.innerText = colorName;
-    // colorDemoImg.setAttribute("src", `${doc.data().ImgLink}`);
+    colorDemoImg.setAttribute("src", `${doc.data().ImgLink}`);
   }
   const blackScreen = document.querySelector(".black-screen");
   const colorDemoCloseBtn = document.querySelector(".colorDemoPopup .closeBtn");
