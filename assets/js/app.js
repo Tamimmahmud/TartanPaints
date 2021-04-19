@@ -19,6 +19,7 @@ const greysArray = [];
 let greys;
 
 let colorSwatchesArray = [];
+const otherColorsUl = document.querySelector("ul.otherColorsUl");
 
 function renderColorSwatch(doc, container) {
   let li = document.createElement("li");
@@ -44,6 +45,7 @@ function renderColorSwatch(doc, container) {
   copyIcon.setAttribute("src", "./assets/images/copyIcon.png");
   colorBox.setAttribute("style", `background-color: ${doc.data().CodeHex}`);
   colorBox.setAttribute("data-colorHex", `${doc.data().CodeHex}`);
+  colorBox.setAttribute("data-imgLink", `${doc.data().ImgLink}`);
   li.setAttribute("data-colorName", `${doc.data().ColorName}`);
   li.appendChild(colorBox);
   li.appendChild(swatchContent);
@@ -51,37 +53,28 @@ function renderColorSwatch(doc, container) {
 
   container.appendChild(li);
 
-  function colorDemoSetup(colorHex, colorName) {
-    colorSolid.setAttribute("style", `background-color: ${colorHex}`);
-    colorDemoCHex.innerText = `${colorHex}`;
-    colorDemoCName.innerText = colorName;
-    colorDemoImg.setAttribute("src", `${doc.data().ImgLink}`);
-
-    const thisColorObject = doc.data();
-    function checkInArray(arr, val) {
-      // console.log(arr, val);
-      return arr.some((arrVal) => {
-        // console.log(arrVal.docKey, val.docKey);
-        val === arrVal;
-      });
-    }
-
-    const try1 = checkInArray(whitesArray, thisColorObject);
+  function colorDemoSetup(colorHex, colorName, imgLink) {
+    let thisColorObject = doc.data();
+    let resultArray = [];
     function findInArray(arr, color) {
       const result = arr.find(({ docKey }) => docKey === color.docKey);
       if (result) {
-        const resultArray = arr.filter(({ docKey }) => docKey != color.docKey);
-
+        resultArray = arr.filter(({ docKey }) => docKey != color.docKey);
+        console.log(resultArray);
         // GENERATE BOXES HERE
         resultArray.forEach((item) => renderColorList(otherColorsUl, item));
       } else {
-        console.log("failed to match");
+        console.log("na");
       }
     }
     findInArray(whitesArray, thisColorObject);
     findInArray(greysArray, thisColorObject);
+    colorSolid.setAttribute("style", `background-color: ${colorHex}`);
+    colorDemoCHex.innerText = `${colorHex}`;
+    colorDemoCName.innerText = colorName;
+    colorDemoImg.setAttribute("src", `${imgLink}`);
   }
-  const otherColorsUl = document.querySelector("ul.otherColorsUl");
+
   function renderColorList(container, doc) {
     let li = document.createElement("li");
     let popup = document.createElement("div");
@@ -98,6 +91,7 @@ function renderColorSwatch(doc, container) {
     popup.appendChild(popupColorCode);
     colorBox.setAttribute("style", `background-color: ${doc.CodeHex}`);
     colorBox.setAttribute("data-colorHex", `${doc.CodeHex}`);
+    colorBox.setAttribute("data-imgLink", `${doc.ImgLink}`);
     li.setAttribute("data-colorName", `${doc.ColorName}`);
     li.appendChild(colorBox);
     colorBox.appendChild(popup);
@@ -106,18 +100,19 @@ function renderColorSwatch(doc, container) {
     colorBox.addEventListener("click", (e) => {
       let colorHex = e.target.getAttribute("data-colorHex");
       let colorName = e.target.parentElement.getAttribute("data-colorName");
-      container.clearChildren();
-      colorHex, colorName;
+      let imgLink = e.target.getAttribute("data-imgLink");
+      container.innerHTML = "";
+      colorDemoLoad(colorHex, colorName, imgLink);
     });
   }
   const blackScreen = document.querySelector(".black-screen");
   const colorDemoCloseBtn = document.querySelector(".colorDemoPopup .closeBtn");
-  function colorDemoLoad(colorHex, colorName) {
+  function colorDemoLoad(colorHex, colorName, imgLink) {
     if (!colorDemoPopup.classList.contains("active")) {
       colorDemoPopup.classList.add("active");
       blackScreen.classList.toggle("active");
     }
-    colorDemoSetup(colorHex, colorName);
+    colorDemoSetup(colorHex, colorName, imgLink);
   }
 
   function colorDemoClose() {
@@ -134,7 +129,9 @@ function renderColorSwatch(doc, container) {
   colorBox.addEventListener("click", (e) => {
     let colorHex = e.target.getAttribute("data-colorHex");
     let colorName = e.target.parentElement.getAttribute("data-colorName");
-    colorDemoLoad(colorHex, colorName);
+    let imgLink = e.target.getAttribute("data-imgLink");
+    otherColorsUl.innerHTML = "";
+    colorDemoLoad(colorHex, colorName, imgLink);
   });
 
   function copyToClipboard(e) {
