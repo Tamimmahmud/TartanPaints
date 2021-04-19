@@ -3,9 +3,9 @@ const colorGroup = mainContainer.querySelector(".color-groups");
 const whiteContainer = colorGroup.querySelector(".whites ul");
 const greyContainer = colorGroup.querySelector(".greys ul");
 const testBtn = document.querySelector(".test");
-var colorsRef = firestore.collection("colorProfiles");
-var whitesRef = colorsRef.where("Group", "==", "Whites");
-var greysRef = colorsRef.where("Group", "==", "Greys");
+let colorsRef = firestore.collection("colorProfiles");
+let whitesRef = colorsRef.where("Group", "==", "Whites");
+let greysRef = colorsRef.where("Group", "==", "Greys");
 
 const colorDemoPopup = document.querySelector(".colorDemoPopup");
 const colorSolid = document.querySelector(".colorSolid");
@@ -16,8 +16,10 @@ let colorDemoImg = document.querySelector(".demoImg img");
 const copiedPopup = document.querySelector(".copiedPopUp");
 const whitesArray = [];
 const greysArray = [];
+let greys;
 
 let colorSwatchesArray = [];
+
 function renderColorSwatch(doc, container) {
   let li = document.createElement("li");
   let popup = document.createElement("div");
@@ -54,6 +56,59 @@ function renderColorSwatch(doc, container) {
     colorDemoCHex.innerText = `${colorHex}`;
     colorDemoCName.innerText = colorName;
     colorDemoImg.setAttribute("src", `${doc.data().ImgLink}`);
+
+    const thisColorObject = doc.data();
+    function checkInArray(arr, val) {
+      // console.log(arr, val);
+      return arr.some((arrVal) => {
+        // console.log(arrVal.docKey, val.docKey);
+        val === arrVal;
+      });
+    }
+
+    const try1 = checkInArray(whitesArray, thisColorObject);
+    function findInArray(arr, color) {
+      const result = arr.find(({ docKey }) => docKey === color.docKey);
+      if (result) {
+        const resultArray = arr.filter(({ docKey }) => docKey != color.docKey);
+
+        // GENERATE BOXES HERE
+        resultArray.forEach((item) => renderColorList(otherColorsUl, item));
+      } else {
+        console.log("failed to match");
+      }
+    }
+    findInArray(whitesArray, thisColorObject);
+    findInArray(greysArray, thisColorObject);
+  }
+  const otherColorsUl = document.querySelector("ul.otherColorsUl");
+  function renderColorList(container, doc) {
+    let li = document.createElement("li");
+    let popup = document.createElement("div");
+    let colorBox = document.createElement("div");
+    let popupColorName = document.createElement("span");
+    let popupColorCode = document.createElement("span");
+    popupColorName.innerText = `${doc.ColorName}`;
+    popupColorCode.innerText = `${doc.CodeHex}`;
+
+    colorBox.classList.add("color-swatch");
+
+    popup.classList.add("colorPopup");
+    popup.appendChild(popupColorName);
+    popup.appendChild(popupColorCode);
+    colorBox.setAttribute("style", `background-color: ${doc.CodeHex}`);
+    colorBox.setAttribute("data-colorHex", `${doc.CodeHex}`);
+    li.setAttribute("data-colorName", `${doc.ColorName}`);
+    li.appendChild(colorBox);
+    colorBox.appendChild(popup);
+    container.appendChild(li);
+
+    colorBox.addEventListener("click", (e) => {
+      let colorHex = e.target.getAttribute("data-colorHex");
+      let colorName = e.target.parentElement.getAttribute("data-colorName");
+      container.clearChildren();
+      colorHex, colorName;
+    });
   }
   const blackScreen = document.querySelector(".black-screen");
   const colorDemoCloseBtn = document.querySelector(".colorDemoPopup .closeBtn");
@@ -126,11 +181,9 @@ function getWhites() {
     .catch((error) => {
       console.log("Error getting documents: ", error);
     });
-
-  // console.log(whitesArray);
 }
 
-function getGreys() {
+async function getGreys() {
   greysRef
     .get()
     .then((querySnapshot) => {
@@ -139,11 +192,29 @@ function getGreys() {
         renderColorSwatch(doc, greyContainer);
       });
     })
+    .then(() => {
+      greys = greysArray;
+      return greys;
+    })
     .catch((error) => {
       console.log("Error getting documents: ", error);
     });
 }
 
-// console.log(colorSwatches);
+const getGreys2 = async () => {
+  let greysArray2 = await greysRef.get().then((docs) => {
+    docs.forEach((doc) => {
+      greysArray.push(doc.data());
+      renderColorSwatch(doc, greyContainer);
+    });
+    // console.log(greysArray);
+  });
+};
+
+(async () => {
+  getGreys2().then(await console.log(greysArray));
+})();
+
 getWhites();
-getGreys();
+// getGreys();
+// console.log(getGreys);

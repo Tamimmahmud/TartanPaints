@@ -238,7 +238,7 @@ footer {
   position: fixed;
   top: 5%;
   left: 5vw;
-  height: 90vh;
+  height: auto;
   /* width: 80vw; */
   z-index: 5;
   border-radius: 0.5rem;
@@ -255,13 +255,29 @@ footer {
 
 .colorDemoContainer {
   max-width: 900px !important;
+  font-family: "Playfair Display";
 }
+
+.closeBtn {
+  display: flex;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+.closeBtn img {
+  width: 1rem;
+}
+
 .colorDetails {
   margin: 2rem 0rem;
 }
 
 .colorDetails > div {
   margin: 1rem 0rem;
+}
+
+.colorDetailsText > * {
+  margin: 0.8rem 0rem;
 }
 
 .colorSolid {
@@ -280,6 +296,30 @@ footer {
   max-width: 1000px;
 }
 
+.otherColors .colors .otherColorsUl {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+
+.otherColorsUl li {
+  max-height: 5rem;
+  width: 5rem;
+  list-style-type: none;
+  margin: 0.2rem 0.1rem;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.otherColorsUl li .color-swatch {
+  height: 4.5rem;
+  width: 4.5rem;
+  filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.15));
+  border-radius: 0.5rem;
+  /* cursor: none; */
+  transition: all 0.3s ease-in-out;
+}
 main.active {
 }
 
@@ -305,7 +345,8 @@ main.active {
   .colorDemoPopup {
     top: 10%;
     left: 0vw;
-    height: 80vh;
+    height: auto;
+    max-height: 65vh;
   }
 }
 
@@ -330,7 +371,8 @@ main.active {
   .colorDemoPopup {
     top: 10%;
     left: 0vw;
-    height: 60vh;
+    height: auto;
+    max-height: 65vh;
   }
 
   .colorDetailsSample {
@@ -344,34 +386,23 @@ main.active {
   .colorDetails > div {
     margin: 1rem 0.5rem;
   }
-
-  .colorSolid {
-    /* width: 70%; */
-    /* padding-top: 70%; */
-  }
-
-  /* .colorDetailsText {
-    text-align: center;
-  } */
 }
 
 @media only screen and (max-width: 410px) {
   .colorDemoPopup {
     top: 10%;
     left: 0vw;
-    height: 60vh;
+    height: auto;
+    max-height: 65vh;
   }
 
-  .colorDetailsSample {
-    width: 30% !important;
+  .colorDetails {
+    text-align: center;
+    justify-content: center;
   }
 
   .colorDetailsText {
     width: 60% !important;
-  }
-
-  .colorDetailsText {
-    /* text-align: center; */
   }
 
   .colorDetailsText h3 {
