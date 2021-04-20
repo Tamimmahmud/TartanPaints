@@ -173,10 +173,11 @@ main {
   justify-content: space-around;
   /* opacity: 0; */
   text-align: center;
+  z-index: 6;
 }
 
 .group ul li .color-swatch:hover .colorPopup {
-  display: none;
+  display: block;
 }
 
 .colorPopup span {
@@ -238,7 +239,7 @@ footer {
   position: fixed;
   top: 5%;
   left: 5vw;
-  height: auto;
+  height: 90vh;
   /* width: 80vw; */
   z-index: 5;
   border-radius: 0.5rem;
@@ -265,6 +266,10 @@ footer {
   top: 1rem;
 }
 .closeBtn img {
+  display: flex;
+  position: sticky;
+  left: 1rem;
+  top: 1rem;
   width: 1rem;
 }
 

@@ -53,68 +53,75 @@ function renderColorSwatch(doc, container) {
 
   container.appendChild(li);
 
-  function colorDemoSetup(colorHex, colorName, imgLink) {
-    let thisColorObject = doc.data();
+  function renderColorList(container, doc) {
+    let li = document.createElement("li");
+    let popup = document.createElement("div");
+    let colorBox2 = document.createElement("div");
+    let popupColorName = document.createElement("span");
+    let popupColorCode = document.createElement("span");
+    popupColorName.innerText = `${doc.ColorName}`;
+    popupColorCode.innerText = `${doc.CodeHex}`;
+
+    colorBox2.classList.add("color-swatch");
+
+    popup.classList.add("colorPopup");
+    popup.appendChild(popupColorName);
+    popup.appendChild(popupColorCode);
+    colorBox2.setAttribute("style", `background-color: ${doc.CodeHex}`);
+    colorBox2.setAttribute("data-colorHex", `${doc.CodeHex}`);
+    colorBox2.setAttribute("data-imgLink", `${doc.ImgLink}`);
+    li.setAttribute("data-colorName", `${doc.ColorName}`);
+    li.appendChild(colorBox2);
+    colorBox2.appendChild(popup);
+    container.appendChild(li);
+
+    colorBox2.addEventListener("click", (e) => {
+      let colorHex = e.target.getAttribute("data-colorHex");
+      let colorName = e.target.parentElement.getAttribute("data-colorName");
+      let imgLink = e.target.getAttribute("data-imgLink");
+      container.innerHTML = "";
+      colorDemoSetup(colorHex, colorName, imgLink, doc);
+    });
+  }
+
+  // Generate content inside color Demo Popup
+  function colorDemoSetup(colorHex, colorName, imgLink, colorObj) {
+    let thisColorObject = colorObj; // ***
+    console.log(thisColorObject);
     let resultArray = [];
+
+    // finds if selected color is found in any of the colorGroups
+    // when found, it renders the color boxes for the REMAINGING colors in the array
     function findInArray(arr, color) {
-      const result = arr.find(({ docKey }) => docKey === color.docKey);
+      const result = arr.find(({ docKey }) => docKey === color.docKey); // finds if array 'arr' has an object of key docKey, with value color.docKey (returns boolean)
       if (result) {
         resultArray = arr.filter(({ docKey }) => docKey != color.docKey);
-        console.log(resultArray);
         // GENERATE BOXES HERE
         resultArray.forEach((item) => renderColorList(otherColorsUl, item));
       } else {
-        console.log("na");
+        console.log("not found in array");
       }
     }
-    findInArray(whitesArray, thisColorObject);
-    findInArray(greysArray, thisColorObject);
+    findInArray(whitesArray, colorObj);
+    findInArray(greysArray, colorObj);
     colorSolid.setAttribute("style", `background-color: ${colorHex}`);
     colorDemoCHex.innerText = `${colorHex}`;
     colorDemoCName.innerText = colorName;
     colorDemoImg.setAttribute("src", `${imgLink}`);
   }
 
-  function renderColorList(container, doc) {
-    let li = document.createElement("li");
-    let popup = document.createElement("div");
-    let colorBox = document.createElement("div");
-    let popupColorName = document.createElement("span");
-    let popupColorCode = document.createElement("span");
-    popupColorName.innerText = `${doc.ColorName}`;
-    popupColorCode.innerText = `${doc.CodeHex}`;
-
-    colorBox.classList.add("color-swatch");
-
-    popup.classList.add("colorPopup");
-    popup.appendChild(popupColorName);
-    popup.appendChild(popupColorCode);
-    colorBox.setAttribute("style", `background-color: ${doc.CodeHex}`);
-    colorBox.setAttribute("data-colorHex", `${doc.CodeHex}`);
-    colorBox.setAttribute("data-imgLink", `${doc.ImgLink}`);
-    li.setAttribute("data-colorName", `${doc.ColorName}`);
-    li.appendChild(colorBox);
-    colorBox.appendChild(popup);
-    container.appendChild(li);
-
-    colorBox.addEventListener("click", (e) => {
-      let colorHex = e.target.getAttribute("data-colorHex");
-      let colorName = e.target.parentElement.getAttribute("data-colorName");
-      let imgLink = e.target.getAttribute("data-imgLink");
-      container.innerHTML = "";
-      colorDemoLoad(colorHex, colorName, imgLink);
-    });
-  }
   const blackScreen = document.querySelector(".black-screen");
   const colorDemoCloseBtn = document.querySelector(".colorDemoPopup .closeBtn");
-  function colorDemoLoad(colorHex, colorName, imgLink) {
+
+  // Load colorDemo Popup
+  function colorDemoLoad(colorHex, colorName, imgLink, colorObj) {
     if (!colorDemoPopup.classList.contains("active")) {
       colorDemoPopup.classList.add("active");
       blackScreen.classList.toggle("active");
     }
-    colorDemoSetup(colorHex, colorName, imgLink);
+    colorDemoSetup(colorHex, colorName, imgLink, colorObj);
   }
-
+  // Close color Demo Popup
   function colorDemoClose() {
     if (colorDemoPopup.classList.contains("active")) {
       colorDemoPopup.classList.remove("active");
@@ -131,7 +138,7 @@ function renderColorSwatch(doc, container) {
     let colorName = e.target.parentElement.getAttribute("data-colorName");
     let imgLink = e.target.getAttribute("data-imgLink");
     otherColorsUl.innerHTML = "";
-    colorDemoLoad(colorHex, colorName, imgLink);
+    colorDemoLoad(colorHex, colorName, imgLink, doc.data());
   });
 
   function copyToClipboard(e) {
@@ -204,14 +211,8 @@ const getGreys2 = async () => {
       greysArray.push(doc.data());
       renderColorSwatch(doc, greyContainer);
     });
-    // console.log(greysArray);
   });
 };
 
-(async () => {
-  getGreys2().then(await console.log(greysArray));
-})();
-
+getGreys2();
 getWhites();
-// getGreys();
-// console.log(getGreys);
