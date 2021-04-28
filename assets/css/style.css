@@ -8,20 +8,40 @@ body {
 nav {
   background-image: url(../images/TartanBanner.png);
   background-size: cover;
-  /* height: 20vh; */
-  max-height: auto;
 }
 
+.navContainer {
+  width: 100% !important;
+  margin: auto 10% auto 10% !important;
+  justify-content: space-around !important;
+}
+.navbar-collapse {
+  display: flex;
+  justify-content: center;
+}
 .navbar-nav {
+  width: 80% !important;
+  justify-content: space-around !important;
 }
 
 .navbar-nav .nav-link {
   font-family: Playfair Display;
   text-transform: uppercase;
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: 0.1rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0rem;
   color: rgba(255, 255, 255, 1) !important;
+}
+.fa-shopping-basket,
+.fa-shopping-cart {
+  color: white;
+  font-size: 2rem;
+}
+.cartNav#cart {
+  display: block;
+}
+.cartNav#basket {
+  display: none;
 }
 .nav div {
   /* margin: ; */
@@ -190,9 +210,9 @@ main {
 
 .copiedPopUp {
   /* visibility: hidden; */
-  opacity: 0;
+  display: none;
   position: fixed;
-  top: 47.5vh;
+  top: 25vh;
   left: 40%;
   width: 25rem;
   height: 13rem;
@@ -207,6 +227,7 @@ main {
 
 .copiedPopUp.active {
   /* width: 25rem; */
+  display: flex;
   opacity: 1;
   /* visibility: visible; */
 }
@@ -217,7 +238,7 @@ main {
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s ease-in-out;
-  height: 80%;
+  height: 100%;
 }
 .copiedPopUp .copiedColorSwatch {
   height: 2rem;
@@ -227,7 +248,7 @@ main {
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
 }
 .copiedPopUp .copiedContent * {
-  margin: 0.2rem 0rem;
+  margin: 0.1rem 0rem;
 }
 
 .copiedPopUp .copiedContent .copiedMsg {
@@ -296,6 +317,7 @@ footer {
   position: absolute;
   right: 1rem;
   top: 1rem;
+  cursor: pointer;
 }
 .closeBtn img {
   display: flex;
@@ -370,6 +392,14 @@ main.active {
 
 .otherColors .placeholder {
   background-color: peachpuff;
+}
+@media only screen and (max-width: 1000px) {
+  .cartNav#cart {
+    display: none;
+  }
+  .cartNav#basket {
+    display: block;
+  }
 }
 @media only screen and (max-width: 768px) {
   .copiedPopUp {
