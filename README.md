@@ -33,8 +33,6 @@ Design of the system: https://miro.com/app/board/o9J_lRnQ92E=/
 
 ## Project management methodologies used for this Project: Agile
 
-## Current Progress: 
-Able to retrieve colors from database and show them in the color picker tool. Yet to style it properly and create mobile version.
-Please check the image below
-![image](https://user-images.githubusercontent.com/49336177/111312525-7bd8b600-86b3-11eb-9ba8-2a38edfca8c6.png)
+## Current Progress: Complete and deployed in firebase.
 
+https://tartanpaints-1d7b9.web.app/
