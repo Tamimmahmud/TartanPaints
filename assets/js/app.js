@@ -104,10 +104,33 @@ function renderColorSwatch(doc, container) {
     }
     findInArray(whitesArray, colorObj);
     findInArray(greysArray, colorObj);
+
+    // setup Solid color Sample, color Name and gets demo img from link
     colorSolid.setAttribute("style", `background-color: ${colorHex}`);
     colorDemoCHex.innerText = `${colorHex}`;
     colorDemoCName.innerText = colorName;
     colorDemoImg.setAttribute("src", `${imgLink}`);
+
+    let copyDemoColor = document.querySelector(".copyDemoColor");
+    copyDemoColor.addEventListener("click", () => {
+      // copy to clipboard
+      const el = document.createElement("textarea");
+      el.value = colorName;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      el.remove();
+      //activates copied to clipboard msg
+
+      copiedPopup.classList.add("active");
+      const copiedColorSwatch = document.querySelector(".copiedColorSwatch");
+      copiedColorSwatch.setAttribute("style", `background-color: ${colorHex}`);
+      const copiedPopUpSpan = document.querySelector(".copiedColorName");
+      copiedPopUpSpan.innerText = colorName;
+      setTimeout(() => {
+        copiedPopup.classList.remove("active");
+      }, 1500);
+    });
   }
 
   const blackScreen = document.querySelector(".black-screen");
@@ -146,7 +169,7 @@ function renderColorSwatch(doc, container) {
     let colorSwatch = e.target.parentElement;
     let listItem = colorSwatch.parentElement;
     let dataColorName = listItem.dataset.colorname;
-
+    let colorSwatchHex = listItem.firstChild.dataset.colorhex;
     // copy to clipboard
     const el = document.createElement("textarea");
     el.value = dataColorName;
@@ -157,10 +180,15 @@ function renderColorSwatch(doc, container) {
 
     copiedPopup.classList.add("active");
     const copiedPopUpSpan = document.querySelector(".copiedColorName");
+    const copiedColorSwatch = document.querySelector(".copiedColorSwatch");
+    copiedColorSwatch.setAttribute(
+      "style",
+      `background-color: ${colorSwatchHex}`
+    );
     copiedPopUpSpan.innerText = dataColorName;
     setTimeout(() => {
       copiedPopup.classList.remove("active");
-    }, 800);
+    }, 1500);
   }
 
   copyIcon.addEventListener("click", (e) => {
